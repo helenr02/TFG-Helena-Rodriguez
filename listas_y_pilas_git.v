@@ -272,20 +272,18 @@ Proof. intros A. induction n.
     + simpl in H. Require Import Lia. lia. 
   - intros. induction l. 
     + simpl. reflexivity.
-    + simpl. apply IH. simpl in H. lia.
+    + simpl. apply IHn. simpl in H. lia.
 Qed.
 
-
-End Listas.
 
 Require Import Extraction.
 Extraction Language Haskell.
 Extract Inductive bool => "Bool" [ "True" "False" ].
 Extract Inductive option => "Maybe" [ "Just" "Nothing" ].
-Extract Inductive list => "[]" [ "[]" "(:)" ].
 Extract Inductive nat =>
   Int [ "0" "succ" ] "(\\fO fS n -> if n == 0 then fO () else fS (n - 1))".
 Extract Inlined Constant Init.Nat.mul => "(*)".
+End Listas.
 Extraction "C:/Users/Helena/Desktop/UNI/Coq_bueno/extracciones/mislitas.hs" Listas.
 
 
@@ -370,7 +368,7 @@ Require Import Extraction.
 Extraction Language OCaml.
 Extract Inductive bool => "bool" [ "true" "false" ].
 Extract Inductive option => "option" [ "Some" "None" ].
-Extract Inductive list => "list" [ "[]" "(::)" ].
+Extract Inductive lista => "list" [ "[]" "(::)" ].
 Extract Inlined Constant length => "List.length".
 Extraction "C:/Users/Helena/Desktop/UNI/Coq_bueno/extracciones/miPila.ml" MiPila.
 
